@@ -1,0 +1,307 @@
+﻿<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MTO.Framework.Web.Mvc5</name>
+    </assembly>
+    <members>
+        <member name="M:MTO.Framework.Web.Mvc.ControllerExtensions.IsController(System.Type)">
+            <summary>
+            Determines whether the specified type is a controller
+            </summary>
+            <param name="type">Type to check</param>
+            <returns>True if type is a controller, otherwise false</returns>
+        </member>
+        <member name="M:MTO.Framework.Web.Mvc.Helpers.Analytics.GetPiwikHtml(System.Uri,System.Int32)">
+            <summary>
+            Sert à générer le code javascript requis pour utiliser Piwik Analytics
+            </summary>
+            <param name="uri">L'adresse URL pour rejoindre le site de Piwik</param>
+            <param name="siteId">L'id de votre site qui est enregistré avec Piwik</param>
+            <returns></returns>
+        </member>
+        <member name="M:MTO.Framework.Web.Mvc.Html.AuthorizationExtensions.IsAuthorized``1(System.Web.Mvc.HtmlHelper,System.Linq.Expressions.Expression{System.Action{``0}})">
+            <summary>
+            Determines whether the specified action is authorized by examining all <see cref="T:System.Web.Mvc.IAuthorizationFilter"/> attributes.
+            </summary>
+            <typeparam name="TController">The type of the controller.</typeparam>
+            <param name="helper">The helper.</param>
+            <param name="action">The action method to be called.</param>
+            <returns>
+                <c>true</c> if the specified helper is authorized; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:MTO.Framework.Web.Mvc.Html.AuthorizationExtensions.IsAuthorized(System.Web.Mvc.IAuthorizationFilter,System.Web.Mvc.ControllerContext,System.Web.Mvc.ActionDescriptor)">
+            <summary>
+            Determines whether the specified authorization filter is authorized.
+            </summary>
+            <param name="authorizationFilter">The authorization filter.</param>
+            <param name="controllerContext">The controller context.</param>
+            <param name="actionDescriptor">The action descriptor.</param>
+            <returns>
+                <c>true</c> if the specified authorization filter is authorized; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:MTO.Framework.Web.Mvc.Html.FilterExtensions.GetAttributes``1(System.Web.Mvc.ControllerDescriptor)">
+            <summary>
+            Returns specified attributes for an action descriptor.
+            </summary>
+            <typeparam name="TAttribute">Type de l'attribut</typeparam>
+            <param name="controller">The controller.</param>
+            <returns>Returns specified attributes for an action method along with the action's controller.</returns>
+        </member>
+        <member name="M:MTO.Framework.Web.Mvc.Html.FilterExtensions.GetAttributes``1(System.Web.Mvc.ActionDescriptor)">
+            <summary>
+            Returns specified attributes for an action descriptor.
+            </summary>
+            <typeparam name="TAttribute">Le type de l'attribut</typeparam>
+            <param name="action">The action.</param>
+            <returns>Returns specified attributes for an action method along with the action's controller.</returns>
+        </member>
+        <member name="M:MTO.Framework.Web.Mvc.Html.FilterExtensions.GetAttributes``1(System.Linq.Expressions.MethodCallExpression)">
+            <summary>
+            This method returns specified attributes for an action method along with the action's controller.
+            </summary>
+            <typeparam name="TAttribute">Type de l'attribut</typeparam>
+            <param name="call">The call.</param>
+            <returns>Returns specified attributes for an action method along with the action's controller.</returns>
+        </member>
+        <member name="M:MTO.Framework.Web.Mvc.Html.LabelExtensions.EditorLabel(System.Web.Mvc.HtmlHelper,System.String,System.String,System.Boolean)">
+            <summary>
+            Retourne un libellé HTML contenant un indicateur de champ requis ainsi que le caractère ":" à la fin.
+            </summary>
+            <param name="htmlHelper"></param>
+            <param name="expression"></param>
+            <param name="labelText"></param>
+            <param name="inputRequired">Default value = false</param>
+            <returns></returns>
+        </member>
+        <member name="M:MTO.Framework.Web.Mvc.Html.ScriptExtensions.ScriptBlock(System.Web.Mvc.HtmlHelper,System.Func{System.Object,System.Web.WebPages.HelperResult})">
+            <summary>
+            Sert à déclarer des scripts clients dans les pages web View et PartialView. Chaque déclaration est
+            cumulative.
+            </summary>
+            <param name="htmlHelper"></param>
+            <param name="template"></param>
+            <returns></returns>
+        </member>
+        <member name="T:MTO.Framework.Web.Mvc.ModelBinders.DecimalModelBinder">
+            <summary>
+            Le DefaultModelBinder qu'utilise MVC n'accepte pas les séparateurs de milier et la possibilité d'avoir un "." ou une "," pour le séparateur de décimal
+            lorsque l'utilisateur entre un chiffre pour une propriété de type Decimal. Celui-ci override la convention par défaut et permet à l'utilisateur d'entrer
+            des chiffres contenant un séparateur de milier selon la culture du site web. Ex: '1 234,45', '1 234.45'
+            </summary>
+        </member>
+        <member name="T:MTO.Framework.Web.Mvc.ModelBinders.IntModelBinder">
+            <summary>
+            Le DefaultModelBinder qu'utilise MVC n'accepte pas les séparateurs de milier lorsque l'utilisateur entre un chiffre pour
+            une propriété de type Int. Celui-ci override la convention par défaut et permet à l'utilisateur d'entrer
+            des chiffres contenant un séparateur de milier selon la culture du site web. Ex: '1 234'
+            </summary>
+        </member>
+        <member name="M:MTO.Framework.Web.Mvc.MtoHelper.EnvironmentWatermark">
+            <summary>
+            Affiche un indicateur d'environnement dans la page Web pour les environnements de DEV et TEST.
+            L'environnement est déterminé par l'attribut Name du paramètre MTO -> ENVIRONMENT du fichier config.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MTO.Framework.Web.Mvc.MtoHelper.Piwik">
+            <summary>
+            Sert à générer le code javascript requis pour utiliser Piwik Analytics. 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MTO.Framework.Web.Mvc.MtoHelper.ApplicationVersion">
+            <summary>
+            Obtient la version de l'assembly de l'application Web.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:MTO.Framework.Web.Mvc.MtoHelper.Piv">
+            <summary>
+            Contient le nécessaire pour afficher le PIV dans une page Web
+            </summary>
+        </member>
+        <member name="M:MTO.Framework.Web.Mvc.MtoRazorViewEngine.#ctor">
+            <summary>
+            Ce ViewEngine est une amélioration au RazorViewEngine car il redéfini l'endroit où les AREA sont placés dans le code MVC.
+            Au lieu de s'attendre à avoir un AREA sur le pattern "~/Areas/{2}/Views/{1}/{0}.cshtml", il se retrouvera maintenant à cet
+            endroit: "~/Views/{2}/{1}/{0}.cshtml". Par le fait même, toutes les références à des pages VB.Net on été retirées.
+            </summary>
+        </member>
+        <member name="M:MTO.Framework.Web.Mvc.PivHelper.GetPiv">
+            <summary>
+            Obtient, via un appel à l'API, le nécessaire pour afficher le PIV dans une page Web.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:MTO.Framework.Web.Mvc.Resources.MvcResources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:MTO.Framework.Web.Mvc.Resources.MvcResources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:MTO.Framework.Web.Mvc.Resources.MvcResources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:MTO.Framework.Web.Mvc.Resources.MvcResources.Common_NullOrEmpty">
+            <summary>
+              Looks up a localized string similar to Value cannot be null or empty..
+            </summary>
+        </member>
+        <member name="P:MTO.Framework.Web.Mvc.Resources.MvcResources.HtmlHelper_MissingSelectData">
+            <summary>
+              Looks up a localized string similar to There is no ViewData item of type &apos;{1}&apos; that has the key &apos;{0}&apos;..
+            </summary>
+        </member>
+        <member name="P:MTO.Framework.Web.Mvc.Resources.MvcResources.HtmlHelper_WrongSelectDataType">
+            <summary>
+              Looks up a localized string similar to The ViewData item that has the key &apos;{0}&apos; is of type &apos;{1}&apos; but must be of type &apos;{2}&apos;..
+            </summary>
+        </member>
+        <member name="M:MTO.Framework.Web.Mvc.UrlExtensions.ContentAbsolute(System.Web.Mvc.UrlHelper,System.String)">
+            <summary>
+            Generates a fully qualified URL.
+            </summary>
+            <param name="url"></param>
+            <param name="relativeOrAbsolutePath"></param>
+            <returns></returns>
+        </member>
+        <member name="T:MTO.Framework.Web.Mvc.ViewRenderer">
+            <summary>
+            Class that renders MVC views to a string using the
+            standard MVC View Engine to render the view. 
+            
+            Note: This class can only be used within MVC 
+            applications that have an active ControllerContext.
+            </summary>
+            https://github.com/RickStrahl/WestwindToolkit/blob/master/Westwind.Web.Mvc/Utils/ViewRenderer.cs
+        </member>
+        <member name="M:MTO.Framework.Web.Mvc.ViewRenderer.#ctor(System.Web.Mvc.ControllerContext)">
+            <summary>
+            Initializes the ViewRenderer with a Context.
+            </summary>
+            <param name="controllerContext">
+            If you are running within the context of an ASP.NET MVC request pass in
+            the controller's context. 
+            Only leave out the context if no context is otherwise available.
+            </param>
+        </member>
+        <member name="M:MTO.Framework.Web.Mvc.ViewRenderer.RenderView(System.String,System.Object)">
+            <summary>
+            Renders a full MVC view to a string. Will render with the full MVC
+            View engine including running _ViewStart and merging into _Layout        
+            </summary>
+            <param name="viewPath">
+            The path to the view to render. Either in same controller, shared by 
+            name or as fully qualified ~/ path including extension
+            </param>
+            <param name="model">The model to render the view with</param>
+            <returns>String of the rendered view or null on error</returns>
+        </member>
+        <member name="M:MTO.Framework.Web.Mvc.ViewRenderer.RenderPartialView(System.String,System.Object)">
+            <summary>
+            Renders a partial MVC view to string. Use this method to render
+            a partial view that doesn't merge with _Layout and doesn't fire
+            _ViewStart.
+            </summary>
+            <param name="viewPath">
+            The path to the view to render. Either in same controller, shared by 
+            name or as fully qualified ~/ path including extension
+            </param>
+            <param name="model">The model to pass to the viewRenderer</param>
+            <returns>String of the rendered view or null on error</returns>
+        </member>
+        <member name="M:MTO.Framework.Web.Mvc.ViewRenderer.RenderView(System.String,System.Object,System.Web.Mvc.ControllerContext)">
+            <summary>
+            Renders a partial MVC view to string. Use this method to render
+            a partial view that doesn't merge with _Layout and doesn't fire
+            _ViewStart.
+            </summary>
+            <param name="viewPath">
+            The path to the view to render. Either in same controller, shared by 
+            name or as fully qualified ~/ path including extension
+            </param>
+            <param name="model">The model to pass to the viewRenderer</param>
+            <param name="controllerContext">Active Controller context</param>
+            <returns>String of the rendered view or null on error</returns>
+        </member>
+        <member name="M:MTO.Framework.Web.Mvc.ViewRenderer.RenderView(System.String,System.Object,System.Web.Mvc.ControllerContext,System.String@)">
+            <summary>
+            Renders a partial MVC view to string. Use this method to render
+            a partial view that doesn't merge with _Layout and doesn't fire
+            _ViewStart.
+            </summary>
+            <param name="viewPath">
+            The path to the view to render. Either in same controller, shared by 
+            name or as fully qualified ~/ path including extension
+            </param>
+            <param name="model">The model to pass to the viewRenderer</param>
+            <param name="controllerContext">Active Controller context</param>
+            <param name="errorMessage">optional out parameter that captures an error message instead of throwing</param>
+            <returns>String of the rendered view or null on error</returns>
+        </member>
+        <member name="M:MTO.Framework.Web.Mvc.ViewRenderer.RenderPartialView(System.String,System.Object,System.Web.Mvc.ControllerContext)">
+            <summary>
+            Renders a partial MVC view to string. Use this method to render
+            a partial view that doesn't merge with _Layout and doesn't fire
+            _ViewStart.
+            </summary>
+            <param name="viewPath">
+            The path to the view to render. Either in same controller, shared by 
+            name or as fully qualified ~/ path including extension
+            </param>
+            <param name="model">The model to pass to the viewRenderer</param>
+            <param name="controllerContext">Active controller context</param>
+            <returns>String of the rendered view or null on error</returns>
+        </member>
+        <member name="M:MTO.Framework.Web.Mvc.ViewRenderer.RenderPartialView(System.String,System.Object,System.Web.Mvc.ControllerContext,System.String@)">
+            <summary>
+            Renders a partial MVC view to string. Use this method to render
+            a partial view that doesn't merge with _Layout and doesn't fire
+            _ViewStart.
+            </summary>
+            <param name="viewPath">
+            The path to the view to render. Either in same controller, shared by 
+            name or as fully qualified ~/ path including extension
+            </param>
+            <param name="model">The model to pass to the viewRenderer</param>
+            <param name="controllerContext">Active controller context</param>
+            <param name="errorMessage">optional output parameter to receive an error message on failure</param>
+            <returns>String of the rendered view or null on error</returns>
+        </member>
+        <member name="M:MTO.Framework.Web.Mvc.ViewRenderer.RenderViewToStringInternal(System.String,System.Object,System.Boolean)">
+            <summary>
+            Internal method that handles rendering of either partial or 
+            or full views.
+            </summary>
+            <param name="viewPath">
+            The path to the view to render. Either in same controller, shared by 
+            name or as fully qualified ~/ path including extension
+            </param>
+            <param name="model">Model to render the view with</param>
+            <param name="partial">Determines whether to render a full or partial view</param>
+            <returns>String of the rendered view</returns>
+        </member>
+        <member name="M:MTO.Framework.Web.Mvc.ViewRenderer.CreateController``1(System.Web.Routing.RouteData)">
+            <summary>
+            Creates an instance of an MVC controller from scratch 
+            when no existing ControllerContext is present       
+            </summary>
+            <typeparam name="T">Type of the controller to create</typeparam>
+            <returns></returns>
+        </member>
+        <member name="P:MTO.Framework.Web.Mvc.ViewRenderer.Context">
+            <summary>
+            Required Controller Context
+            </summary>
+        </member>
+    </members>
+</doc>

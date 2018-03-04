@@ -1,0 +1,36 @@
+﻿@model ArchBook.Services.Pilotage.Books.Dto.BookIndexDto
+
+<tr id="book@(Model.BookId)" class="book" data-book-id="@Model.BookId">
+    <td>
+        @Model.Title<br />
+        @if (Model.Authors.Any())
+        {
+            <small class="authors text-muted">by @(string.Join(", ", Model.Authors))</small>
+        }
+    </td>
+    <td class="text-right">
+        @if (Model.PromotionalPrice.HasValue)
+        {
+            <span class="text-danger">@Model.PromotionalPrice.Value.ToString("C")</span><br />
+            <s><small>@Model.Price.ToString("C")</small></s>
+        }
+        else
+        {
+            @Model.Price.ToString("C")
+        }
+    </td>
+    <td class="actions">
+        <div class="d-flex justify-content-end">
+            <button class="btn btn-flat btn-flat-secondary btn-icon-only" data-toggle="modal" data-target="#bookModal" title="Modifier"><i class="fas fa-pencil-alt"></i></button>
+            <button class="btn btn-flat btn-flat-secondary btn-icon-only" title="Supprimer"><i class="fas fa-trash"></i></button>
+            <div class="dropdown">
+                <button class="btn btn-flat btn-flat-secondary btn-icon-only" data-toggle="dropdown" title="Plus"><i class="fas fa-ellipsis-v"></i></button>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <button class="dropdown-item" data-toggle="modal" data-target="#promotionalPriceModal"><i class="fas fa-dollar-sign fa-fw"></i> Prix promotionel</button>
+                    <button class="dropdown-item" href="#"><i class="fas fa-comment fa-fw"></i> Voir commentaires</button>
+                    <button class="dropdown-item" disabled><i class="fas fa-file-alt fa-fw"></i> Générer rapport</button>
+                </div>
+            </div>
+        </div>
+    </td>
+</tr>

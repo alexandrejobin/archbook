@@ -1,0 +1,174 @@
+﻿@model IEnumerable<ArchBook.Services.Pilotage.Books.Dto.BookIndexDto>
+
+@section scripts {
+    @Styles.Render("~/content/daterangepicker")
+    @Scripts.Render("~/bundles/daterangepicker")
+
+    <script>
+        $(function ()
+        {
+            $('#bookModal').on('show.bs.modal', function (e)
+            {
+                var modal = $(this);
+                var button = $(e.relatedTarget);
+                var bookId = button.closest(".book").data("bookId");
+                var url = "";
+
+                if (bookId == null)
+                {
+                    url = "/pilotage/books/add";
+                }
+                else
+                {
+                    url = "/pilotage/books/" + bookId + "/edit";
+                }
+
+                $.get({
+                    url: url,
+                    cache: bookId == null
+                }).done(function (response)
+                {
+                    $(".modal-body", modal).html(response.Data);
+                });
+            }).on("hidden.bs.modal", function (e)
+            {
+                $(".modal-body", this).empty();
+            }).on("submit", "form", function (e)
+            {
+                e.preventDefault();
+                var modal = $(this).closest(".modal");
+                var form = modal.find("form");
+                var url = form.prop("action");
+                var params = form.serialize();
+
+                $.post(url, params)
+                    .done(function (response)
+                    {
+                        if (response.Success)
+                        {
+                            $("#book" + response.Data.BookId).replaceWith(response.Data.Html);
+                            modal.modal('hide');
+                        }
+                        else
+                        {
+                            $(".modal-body", modal).html(response.Data);
+                        }
+                    });
+            }).on("click", ".save", function (e)
+            {
+                $("#bookModal form").submit();
+            });
+
+            $("#promotionalPriceModal").on('show.bs.modal', function (e)
+            {
+                var modal = $(this);
+                var button = $(e.relatedTarget);
+                var bookId = button.closest(".book").data("bookId");
+                var url = "/pilotage/books/" + bookId + "/edit/promotional-price";
+
+                $.get({
+                    url: url,
+                    cache: false
+                }).done(function (response)
+                {
+                    refreshPromotionalPriceBody(modal, response.Data);
+                });
+            }).on("hidden.bs.modal", function (e)
+            {
+                $(".modal-body", this).empty();
+            }).on("submit", "form", function (e)
+            {
+                e.preventDefault();
+                var modal = $(this).closest(".modal");
+                var form = modal.find("form");
+                var url = form.prop("action");
+                var params = form.serialize();
+
+                $.post(url, params)
+                    .done(function (response)
+                    {
+                        if (response.Success)
+                        {
+                            $("#book" + response.Data.BookId).replaceWith(response.Data.Html);
+                            modal.modal('hide');
+                        }
+                        else
+                        {
+                            refreshPromotionalPriceBody(modal, response.Data);
+                        }
+                    });
+            }).on("click", ".save", function (e)
+            {
+                $("#promotionalPriceModal form").submit();
+            });
+        });
+
+        function refreshPromotionalPriceBody(modal, html)
+        {
+            $(".modal-body", modal).html(html);
+
+            var periodDrp = $('#Period', modal).daterangepicker(
+            {
+                autoApply: true,
+                autoUpdateInput: false
+            }, function (startDate, endDate, label)
+            {
+                refreshPeriodInput(startDate, endDate, modal);
+            });
+
+            var startDateInputValue = $("#StartDate", modal).val();
+
+            if (startDateInputValue != "")
+            {
+                var startDate = moment(startDateInputValue, "YYYY-MM-DD");
+                var endDate = moment($("#EndDate", modal).val(), "YYYY-MM-DD");
+
+                periodDrp.data("daterangepicker").setStartDate(startDate);
+                periodDrp.data("daterangepicker").setEndDate(endDate);
+                refreshPeriodInput(startDate, endDate, modal);
+            }
+        }
+
+        function refreshPeriodInput(startDate, endDate, modal)
+        {
+            $("#StartDate", modal).val(startDate.format('YYYY-MM-DD'));
+            $("#EndDate", modal).val(endDate.format('YYYY-MM-DD'));
+            $('#Period', modal).val(startDate.format('YYYY-MM-DD') + " - " + endDate.format('YYYY-MM-DD'));
+        }
+    </script>
+}
+
+<div class="row">
+    <div class="col-sm-8 align-self-auto">
+        <h2>Books</h2>
+    </div>
+    <div class="col-sm-4 align-self-auto">
+        <div style="float:right;">
+            <button class="btn btn-primary" data-toggle="modal" data-target="#bookModal">Nouveau</button>
+        </div>
+    </div>
+</div>
+
+<table class="table table-hover">
+    <colgroup>
+        <col />
+        <col style="width:120px" />
+        <col style="width:96px;" />
+    </colgroup>
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th class="text-right">Price</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var book in Model)
+        {
+            @Html.Partial("_Index_Book", book)
+        }
+    </tbody>
+</table>
+
+@Html.Partial("_Modal_Book")
+@Html.Partial("_Modal_PromotionalPrice")

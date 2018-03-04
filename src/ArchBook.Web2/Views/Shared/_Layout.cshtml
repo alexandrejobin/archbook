@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ArchBook.Web2</title>
+
+    <environment include="Development">
+        <link href="~/css/bootstrap-4.0.0.css" rel="stylesheet" />
+        <link href="~/css/fontawesome-5.0.2.css" rel="stylesheet" />
+        <link href="~/css/site.css" rel="stylesheet" />
+        <script src="~/lib/fontawesome-5.0.2/fontawesome.js"></script>
+        <script src="~/lib/fontawesome-5.0.2/fontawesome-icons.js" defer></script>
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    </environment>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
+        <div class="container">
+            <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">ArchBook.Web2</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-bars fa-lg"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item"><a asp-area="" asp-controller="Books" asp-action="Index" class="nav-link">Books</a></li>
+                    <li class="nav-item"><a asp-area="" asp-controller="Home" asp-action="About" class="nav-link">About</a></li>
+                    <li class="nav-item"><a asp-area="" asp-controller="Home" asp-action="Contact" class="nav-link">Contact</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Pilotage
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a asp-area="" asp-controller="BooksPilotage" asp-action="Index" class="dropdown-item">Books</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    <environment include="Development">
+        <script src="~/lib/jquery-3.2.1.js" asp-append-version="true"></script>
+        <script src="~/lib/popper-1.13.0.js" asp-append-version="true"></script>
+        <script src="~/lib/bootstrap-4.0.0.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

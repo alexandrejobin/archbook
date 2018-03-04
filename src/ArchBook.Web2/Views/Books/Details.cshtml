@@ -1,0 +1,13 @@
+﻿@model ArchBook.Services.Books.Dto.BookDetailsDto
+
+<h2>Details</h2>
+
+@Model.BookId
+
+<ul>
+    @foreach (var review in Model.Reviews)
+    {
+        <li>@review.Rating</li>
+    }
+</ul>
+

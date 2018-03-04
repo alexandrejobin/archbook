@@ -1,0 +1,36 @@
+﻿@model IEnumerable<ArchBook.Services.Books.Dto.BookListDto>
+
+<style>
+    .book:not(:last-child) {
+        border-bottom: 1px solid #d7d7d7;
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+    }
+
+    .price {
+        margin-top: 8px;
+    }
+
+    .current-price {
+        color: #B12704;
+        font-weight: bold;
+    }
+
+    .published-date {
+        display: inline-block;
+        margin-left: 10px;
+    }
+
+    .stars .star:not(:first-child) {
+        margin-left: 2px;
+    }
+</style>
+
+<h2>Books</h2>
+
+<ul class="books list-unstyled">
+    @foreach (var book in Model)
+    {
+        @Html.Partial("_Index_Book", book)
+    }
+</ul>

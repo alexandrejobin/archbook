@@ -1,0 +1,43 @@
+﻿@model ArchBook.Services.Books.Dto.BookListDto
+
+<li class="book" data-book-id="@Model.BookId">
+    <div class="clearfix">
+        <div class="float-left">
+            <span class="title"><a href="/books/@Model.BookId">@Model.Title</a></span>
+            <small class="published-date">
+                @(Model.PublishedDate?.ToString("d MMMM yyyy"))
+            </small>
+        </div>
+        <div class="float-right">
+            <small class="stars">
+                @if (Model.Rating.HasValue)
+                {
+                    var rating = Math.Round(Model.Rating.Value);
+
+                    for (var i = 1; i <= rating; i++)
+                    {<i class="fas fa-star star"></i>}
+                    for (var i = (rating + 1); i <= 5; i++)
+                    {<i class="far fa-star star"></i>}
+                }
+                else
+                {
+                    @: Not evaluated yet
+                }
+            </small>
+        </div>
+    </div>
+
+    @if (Model.Authors.Any())
+    {
+        <small class="authors text-muted">by @(string.Join(", ", Model.Authors))</small>
+    }
+
+    @if (Model.PromotionalPrice.HasValue)
+    {
+        <div class="price"><span class="current-price">@Model.PromotionalPrice.Value.ToString("C")</span> <s><small>@Model.Price.ToString("C")</small></s></div>
+    }
+    else
+    {
+        <div class="price"><span class="current-price">@Model.Price.ToString("C")</span></div>
+    }
+</li>

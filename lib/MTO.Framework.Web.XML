@@ -1,0 +1,23 @@
+﻿<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MTO.Framework.Web</name>
+    </assembly>
+    <members>
+        <member name="T:MTO.Framework.Web.JsonResponse">
+            <summary>
+            Agit comme classe de base pour bâtir une réponse de type JSON. Ceci sert à standardiser
+            notre façon d'envoyer un objet JSON du côté client.
+            </summary>
+        </member>
+        <member name="T:MTO.Framework.Web.Security.MultiplexMembershipProvider">
+            <summary>
+            Gère le stockage des informations d'appartenance (membership) pour une application ASP.NET dans une ou plusieurs base de données.
+            Ce provider interrogera en même temps tous les autres MembershipProvider qui seront inscrit dans le fichier Web.Config. De cette façon,
+            il est possible d'avoir certains utilisateurs qui sont accessible avec ActiveDirectoryMembershipProvider ainsi que d'autres utilisateurs accessible
+            avec SqlMembershipProvider sans avoir à gérer manuellement tous les environnements de stockage d'information. Par example, Membership.ValidateUser
+            interrogera un par un les MembershipProviders inscrient jusqu'à temps qu'il trouve une réponse.
+            </summary>
+        </member>
+    </members>
+</doc>

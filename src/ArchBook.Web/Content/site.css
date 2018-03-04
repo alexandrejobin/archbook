@@ -1,0 +1,58 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-top:15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+a.disabled {
+    pointer-events: none;
+}
+
+/*a.disabled,
+.btn.disabled,
+.btn:disabled {
+    opacity: 0.26;
+}*/
+
+/*.dropdown-item.disabled, .dropdown-item:disabled {
+    color:inherit;
+}*/
+
+.btn-flat {
+    border: none;
+    background-color: transparent;
+}
+
+.btn-flat:hover {
+    background-color: #ddd;
+}
+
+.btn-flat-danger {
+    color: #dc3545;
+}
+
+.btn-flat-secondary {
+    color: #868e96;
+}
+
+td.actions .btn-icon-only {
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    border-radius: 50%;
+    position: relative;
+    top: -0.22rem;
+}
