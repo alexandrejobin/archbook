@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.AspNetCore.Mvc.ViewFeatures.Internal;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
@@ -33,11 +34,16 @@ namespace ArchBook.Web2
                 throw new ArgumentNullException(nameof(httpContext));
             }
 
+            var executor = httpContext.RequestServices.GetRequiredService<PartialViewResultExecutor>();
+            
+
             var actionContext = new ActionContext(httpContext, httpContext.GetRouteData(), new ActionDescriptor());
             var options = httpContext.RequestServices.GetRequiredService<IOptions<MvcViewOptions>>();
             var htmlHelperOptions = options.Value.HtmlHelperOptions;
-            var viewEngine = partialViewResult.ViewEngine ?? httpContext.RequestServices.GetRequiredService<IRazorViewEngine>();
-            var view = FindView(viewEngine, actionContext, partialViewResult.ViewName);
+            //var viewEngine = partialViewResult.ViewEngine ?? httpContext.RequestServices.GetRequiredService<IRazorViewEngine>();
+            //var view = FindView(viewEngine, actionContext, partialViewResult.ViewName);
+            var view = executor.FindView(actionContext, partialViewResult).View;
+          
 
             using (var output = new StringWriter())
             {
