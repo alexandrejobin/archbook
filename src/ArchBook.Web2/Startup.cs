@@ -65,7 +65,7 @@ namespace ArchBook.Web2
             app.UseMvc();
 
             applicationLifetime.ApplicationStarted.Register(ApplicationStarted);
-            applicationLifetime.ApplicationStopping.Register(ApplicationStopped);
+            applicationLifetime.ApplicationStopped.Register(ApplicationStopped);
         }
 
         private void ApplicationStarted()
