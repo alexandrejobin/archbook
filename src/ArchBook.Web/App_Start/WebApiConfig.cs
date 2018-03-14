@@ -1,4 +1,6 @@
-﻿using NLog;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +23,12 @@ namespace ArchBook.Web
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            // setup camel-case for property names
+            config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+
+            // Remove the XM Formatter from the web api
+            config.Formatters.Remove(GlobalConfiguration.Configuration.Formatters.XmlFormatter);
         }
     }
 
