@@ -1,22 +1,17 @@
 ﻿@model ArchBook.Services.Pilotage.Books.Dto.PromotionalPriceFormDto
 
-@if (!ViewData.ModelState.IsValid)
-{
-    <div class="alert alert-danger alert-dismissible" role="alert">
-        @Html.ValidationSummary()
-        <button type="button" class="close" data-dismiss="alert" aria-label="Fermer">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-}
+<div asp-validation-summary="All" class="alert alert-danger alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Fermer">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
 
-@using (Html.BeginForm())
-{
+<form action="@Url.RouteUrl(this.ViewContext.RouteData.Values)" method="post">
     <div class="form-group row">
-        @Html.LabelFor(x => x.Price, new { @class = "col-sm-3 col-form-label" })
+        <label asp-for="Price" class="col-sm-3 col-form-label"></label>
         <div class="col-sm-3">
             <div class="input-group">
-                @Html.TextBoxFor(x => x.Price, new { @class = "form-control" })
+                <input asp-for="Price" class="form-control" />
                 <div class="input-group-append">
                     <span class="input-group-text">$</span>
                 </div>
@@ -25,11 +20,11 @@
     </div>
     <div class="form-group row">
         <label class="col-sm-3 col-form-label">Period</label>
-        @Html.HiddenFor(x => x.StartDate)
-        @Html.HiddenFor(x => x.EndDate)
+        <input asp-for="StartDate" type="hidden" />
+        <input asp-for="EndDate" type="hidden" />
         <div class="col-sm-4">
-            @Html.TextBox("Period", "", new { @class = "form-control" })
+            <input id="Period" name="Period" class="form-control" />
         </div>
     </div>
-}
+</form>
 
