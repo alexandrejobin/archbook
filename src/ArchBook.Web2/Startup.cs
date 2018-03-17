@@ -45,6 +45,11 @@ namespace ArchBook.Web2
                     setup.HtmlHelperOptions.ClientValidationEnabled = false;
                 });
 
+            services.AddRouting(setup =>
+            {
+                setup.LowercaseUrls = true;
+            });
+
             services.AddRazorViewRenderer();
 
             services.AddScoped<BookDbContext>(_ => new BookDbContext(Configuration.GetConnectionString("BookConnectionString")));
