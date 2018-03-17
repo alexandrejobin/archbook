@@ -9,11 +9,11 @@ namespace ArchBook.Web
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-3.2.1.js"));
+                        "~/Scripts/jquery-3.3.1.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/popper-1.13.0.js",
-                      "~/Scripts/bootstrap-4.0.0b3.js"));
+                      "~/Scripts/bootstrap-4.0.0.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/daterangepicker").Include(
                       "~/Scripts/moment-2.20.1/moment.js",
@@ -30,7 +30,7 @@ namespace ArchBook.Web
                       "~/Content/daterangepicker-2.1.27.css"));
 
             bundles.Add(new StyleBundle("~/content/css").Include(
-                      "~/Content/bootstrap-4.0.0b3.css",
+                      "~/Content/bootstrap-4.0.0.css",
                       "~/Content/fontawesome-5.0.2.css",
                       "~/Content/site.css"));
         }
