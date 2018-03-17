@@ -10,12 +10,10 @@ namespace ArchBook.Web2.Controllers.Pilotage.Books
     public class BooksPilotageController : Controller
     {
         private readonly BookPilotageService bookPilotageService;
-        private readonly IViewRendererService viewRendererService;
 
-        public BooksPilotageController(BookPilotageService bookPilotageService, IViewRendererService viewRendererService)
+        public BooksPilotageController(BookPilotageService bookPilotageService)
         {
             this.bookPilotageService = bookPilotageService;
-            this.viewRendererService = viewRendererService;
         }
 
         [HttpGet]

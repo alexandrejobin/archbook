@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using ArchBook.Data;
 using ArchBook.Services.Books;
@@ -10,11 +11,12 @@ using ArchBook.Services.Pilotage.Books;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc.ApplicationParts;
+using Microsoft.AspNetCore.Mvc.Razor.TagHelpers;
+using Microsoft.AspNetCore.Mvc.TagHelpers;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using static ArchBook.Web2.Controllers.Pilotage.Books.BooksPilotageController;
-using static ArchBook.Web2.ViewResultExtensions;
 
 namespace ArchBook.Web2
 {
@@ -50,13 +52,9 @@ namespace ArchBook.Web2
                 setup.LowercaseUrls = true;
             });
 
-            services.AddRazorViewRenderer();
-
             services.AddScoped<BookDbContext>(_ => new BookDbContext(Configuration.GetConnectionString("BookConnectionString")));
             services.AddScoped<BookService, BookService>();
             services.AddScoped<BookPilotageService, BookPilotageService>();
-            //services.AddTransient<RazorViewToStringRenderer>();
-            //services.AddTransient<ViewRenderService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
