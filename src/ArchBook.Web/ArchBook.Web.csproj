@@ -172,6 +172,7 @@
     <Compile Include="Controllers\Books\BooksController.cs" />
     <Compile Include="Controllers\Errors\ErrorsController.cs" />
     <Compile Include="Controllers\Home\HomeController.cs" />
+    <Compile Include="Controllers\Home\ValuesController1.cs" />
     <Compile Include="Controllers\Pilotage\Books\BooksPilotageController.cs" />
     <Compile Include="GlimpseSecurityPolicy.cs" />
     <Compile Include="Global.asax.cs">
@@ -190,12 +191,12 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\site.css" />
-    <Content Include="Scripts\bootstrap-4.0.0b3.js.map" />
-    <Content Include="Scripts\bootstrap-4.0.0b3.js" />
-    <Content Include="Content\bootstrap-4.0.0b3.css" />
+    <Content Include="Scripts\bootstrap-4.0.0.js.map" />
+    <Content Include="Scripts\bootstrap-4.0.0.js" />
+    <Content Include="Content\bootstrap-4.0.0.css" />
     <Content Include="Scripts\fontawesome-5.0.2\fontawesome-icons.js" />
     <Content Include="Scripts\fontawesome-5.0.2\fontawesome.js" />
-    <Content Include="Scripts\jquery-3.2.1.js" />
+    <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\moment-2.20.1\locales\fr-ca.js" />
     <Content Include="Scripts\moment-2.20.1\moment.js" />
     <Content Include="Scripts\popper-1.13.0.js" />
@@ -218,7 +219,7 @@
     <Content Include="Views\Books\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap-4.0.0b3.css.map" />
+    <Content Include="Content\bootstrap-4.0.0.css.map" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ArchBook.Services\ArchBook.Services.csproj">

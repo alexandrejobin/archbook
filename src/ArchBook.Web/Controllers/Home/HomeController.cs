@@ -92,5 +92,17 @@ namespace ArchBook.Web.Controllers.Home
 
             public override long Position { get; set; }
         }
+
+        [Route("getdata")]
+        public ActionResult GetData()
+        {
+            var model = new
+            {
+                ContactId = 1,
+                Name = "test"
+            };
+
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
     }
 }
