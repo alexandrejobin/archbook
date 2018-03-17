@@ -22,6 +22,25 @@ namespace ArchBook.Web2
 {
     public static class ViewResultExtensions
     {
+        public static string Render(this ViewResult viewResult, HttpContext httpContext)
+        {
+            if (viewResult == null)
+            {
+                throw new ArgumentNullException(nameof(viewResult));
+            }
+
+            if (httpContext == null)
+            {
+                throw new ArgumentNullException(nameof(httpContext));
+            }
+
+            var actionContext = new ActionContext(httpContext, httpContext.GetRouteData(), new ActionDescriptor());
+            var viewEngine = viewResult.ViewEngine ?? httpContext.RequestServices.GetRequiredService<IRazorViewEngine>();
+            var view = FindView(viewEngine, actionContext, viewResult.ViewName, true);
+
+            return RenderToString(actionContext, view, viewResult.ViewData, viewResult.TempData, httpContext);
+        }
+
         public static string Render(this PartialViewResult partialViewResult, HttpContext httpContext)
         {
             if (partialViewResult == null)
@@ -34,24 +53,25 @@ namespace ArchBook.Web2
                 throw new ArgumentNullException(nameof(httpContext));
             }
 
-            var executor = httpContext.RequestServices.GetRequiredService<PartialViewResultExecutor>();
-            
+            var actionContext = new ActionContext(httpContext, httpContext.GetRouteData(), new ActionDescriptor());            
+            var viewEngine = partialViewResult.ViewEngine ?? httpContext.RequestServices.GetRequiredService<IRazorViewEngine>();
+            var view = FindView(viewEngine, actionContext, partialViewResult.ViewName);
 
-            var actionContext = new ActionContext(httpContext, httpContext.GetRouteData(), new ActionDescriptor());
+            return RenderToString(actionContext, view, partialViewResult.ViewData, partialViewResult.TempData, httpContext);            
+        }
+
+        private static string RenderToString(ActionContext actionContext, IView view, ViewDataDictionary viewData, ITempDataDictionary tempData, HttpContext httpContext)
+        {
             var options = httpContext.RequestServices.GetRequiredService<IOptions<MvcViewOptions>>();
             var htmlHelperOptions = options.Value.HtmlHelperOptions;
-            //var viewEngine = partialViewResult.ViewEngine ?? httpContext.RequestServices.GetRequiredService<IRazorViewEngine>();
-            //var view = FindView(viewEngine, actionContext, partialViewResult.ViewName);
-            var view = executor.FindView(actionContext, partialViewResult).View;
-          
 
             using (var output = new StringWriter())
             {
                 var viewContext = new ViewContext(
                     actionContext,
                     view,
-                    partialViewResult.ViewData,
-                    partialViewResult.TempData,
+                    viewData,
+                    tempData,
                     output,
                     htmlHelperOptions);
 
@@ -85,30 +105,5 @@ namespace ArchBook.Web2
 
             throw new InvalidOperationException(errorMessage);
         }
-
-        //public static string ToHtml(this ViewResult result, HttpContext httpContext)
-        //{
-        //    var feature = httpContext.Features.Get<IRoutingFeature>();
-        //    var routeData = feature.RouteData;
-        //    var viewName = result.ViewName ?? routeData.Values["action"] as string;
-        //    var actionContext = new ActionContext(httpContext, routeData, new ControllerActionDescriptor());
-        //    var options = httpContext.RequestServices.GetRequiredService<IOptions<MvcViewOptions>>();
-        //    var htmlHelperOptions = options.Value.HtmlHelperOptions;
-        //    var viewEngineResult = result.ViewEngine?.FindView(actionContext, viewName, true) ?? options.Value.ViewEngines.Select(x => x.FindView(actionContext, viewName, true)).FirstOrDefault(x => x != null);
-        //    var view = viewEngineResult.View;
-        //    var builder = new StringBuilder();
-
-        //    using (var output = new StringWriter(builder))
-        //    {
-        //        var viewContext = new ViewContext(actionContext, view, result.ViewData, result.TempData, output, htmlHelperOptions);
-
-        //        view
-        //            .RenderAsync(viewContext)
-        //            .GetAwaiter()
-        //            .GetResult();
-        //    }
-
-        //    return builder.ToString();
-        //}
     }
 }
