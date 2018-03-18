@@ -19,7 +19,6 @@ namespace ArchBook.Web2
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .ConfigureLogging(c => c.AddDebug())
                 .UseStartup<Startup>()
                 .Build();
     }
