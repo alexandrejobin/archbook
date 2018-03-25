@@ -17,6 +17,8 @@ using Microsoft.AspNetCore.Mvc.TagHelpers;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using StackExchange.Profiling.EntityFramework6;
+using StackExchange.Profiling.Storage;
 
 namespace ArchBook.Web2
 {
@@ -40,6 +42,12 @@ namespace ArchBook.Web2
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMiniProfiler(options =>
+            {
+                options.PopupShowTrivial = true;
+                options.PopupShowTimeWithChildren = true;
+            });
+
             services
                 .AddMvc()
                 .AddViewOptions(setup =>
@@ -62,6 +70,8 @@ namespace ArchBook.Web2
         {
             if (env.IsDevelopment())
             {
+                app.UseMiniProfiler();
+                MiniProfilerEF6.Initialize();
                 app.UseDeveloperExceptionPage();
             }
             else
