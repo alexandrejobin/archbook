@@ -3,6 +3,7 @@ using Autofac;
 using Autofac.Integration.Mvc;
 using MTO.Framework.Web.Mvc;
 using NLog;
+using StackExchange.Profiling;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -52,6 +53,7 @@ namespace ArchBook.Web
             ViewEngines.Engines.Clear();
             ViewEngines.Engines.Add(new MtoRazorViewEngine());
 
+            MiniProfilerConfig.RegisterMiniProfiler();
             ServiceLocatorConfig.RegisterServiceLocator();
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
@@ -66,24 +68,30 @@ namespace ArchBook.Web
         {
             // set a unique id to the current request
             Trace.CorrelationManager.ActivityId = Guid.NewGuid();
+
+            if (Request.IsLocal)
+            {
+                MiniProfiler.StartNew();
+            }
         }
 
-        //protected void Application_EndRequest()
-        //{
+        protected void Application_EndRequest()
+        {
+            MiniProfiler.Current?.Stop();
 
-        //    if (Context.Response.StatusCode == 404)
-        //    {
-        //        Response.Clear();
+            //if (Context.Response.StatusCode == 404)
+            //{
+            //    Response.Clear();
 
-        //        var rd = new RouteData();
-        //        rd.DataTokens["area"] = "AreaName"; // In case controller is in another area
-        //        rd.Values["controller"] = "Errors";
-        //        rd.Values["action"] = "NotFound";
+            //    var rd = new RouteData();
+            //    rd.DataTokens["area"] = "AreaName"; // In case controller is in another area
+            //    rd.Values["controller"] = "Errors";
+            //    rd.Values["action"] = "NotFound";
 
-        //        IController c = new ErrorsController();
-        //        c.Execute(new RequestContext(new HttpContextWrapper(Context), rd));
-        //    }
-        //}
+            //    IController c = new ErrorsController();
+            //    c.Execute(new RequestContext(new HttpContextWrapper(Context), rd));
+            //}
+        }
 
         protected void Application_End()
         {
