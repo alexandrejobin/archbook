@@ -1,2 +1,0 @@
-2018-03-17 09:59:32.6720 INFO  [notauth::] Application is starting.
-2018-03-17 09:59:34.8054 INFO  [notauth::] Application is started.
