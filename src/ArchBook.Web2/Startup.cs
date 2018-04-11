@@ -32,8 +32,8 @@ namespace ArchBook.Web2
         {
             logger.LogInformation("Application starting.");
 
-            this.logger = logger;            
-            Configuration = configuration;            
+            this.Configuration = configuration;
+            this.logger = logger;
 
             // Set up data directory
             AppDomain.CurrentDomain.SetData("DataDirectory", Path.Combine(env.ContentRootPath, "App_Data"));
