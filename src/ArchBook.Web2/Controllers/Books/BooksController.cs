@@ -32,6 +32,7 @@ namespace ArchBook.Web2.Controllers.Books
         [HttpGet("{bookId:int}")]
         public IActionResult Details(int bookId)
         {
+            logger.LogDebug("Getting book {bookId}.", bookId);
             var book = bookService.GetBookDetailsDto(bookId);
 
             return View(book);

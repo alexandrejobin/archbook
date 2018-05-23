@@ -8,7 +8,7 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using NLog.Web;
+using Serilog;
 
 namespace ArchBook.Web2
 {
@@ -16,23 +16,30 @@ namespace ArchBook.Web2
     {
         public static void Main(string[] args)
         {
-            var logger = NLog.LogManager.LoadConfiguration("NLog.config").GetCurrentClassLogger();
+            var configuration = new ConfigurationBuilder()
+               .SetBasePath(Directory.GetCurrentDirectory())
+               .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+               .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production"}.json", optional: true)
+               .Build();
+
+            Log.Logger = new LoggerConfiguration()
+                .ReadFrom.Configuration(configuration)
+                .Enrich.FromLogContext()
+                .CreateLogger();
 
             try
             {
-                logger.Debug("Program start.");
+                Log.Debug("Program start.");
                 BuildWebHost(args).Run();
             }
             catch (Exception ex)
             {
-                //NLog: catch setup errors
-                logger.Error(ex, "Program stopped because of exception.");
+                Log.Fatal(ex, "Program stopped because of exception.");
                 throw;
             }
             finally
             {
-                // Ensure to flush and stop internal timers/threads before application-exit (Avoid segmentation fault on Linux)
-                NLog.LogManager.Shutdown();
+                Log.CloseAndFlush();
             }
         }
 
@@ -64,18 +71,12 @@ namespace ArchBook.Web2
                         config.AddCommandLine(args);
                     }
                 })
-                //.ConfigureLogging((hostingContext, logging) =>
-                //{
-                //    logging.AddConfiguration(hostingContext.Configuration.GetSection("Logging"));
-                //    logging.AddConsole();
-                //    logging.AddDebug();
-                //})
                 .UseIISIntegration()
                 .UseDefaultServiceProvider((context, options) =>
                 {
                     options.ValidateScopes = context.HostingEnvironment.IsDevelopment();
                 })
-                .UseNLog()
+                .UseSerilog()
                 .UseStartup<Startup>();
 
             return builder.Build();
