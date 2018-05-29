@@ -13,9 +13,9 @@
     "sourceMap": false
   },
   {
-    "outputFileName": "wwwroot/css/bootstrap-4.0.0.min.css",
+    "outputFileName": "wwwroot/css/bootstrap-4.1.0.min.css",
     "inputFiles": [
-      "wwwroot/css/bootstrap-4.0.0.css"
+      "wwwroot/css/bootstrap-4.1.0.css"
     ],
     "minify": {
       "enabled": true
@@ -23,9 +23,9 @@
     "sourceMap": true
   },
   {
-    "outputFileName": "wwwroot/lib/bootstrap-4.0.0.min.js",
+    "outputFileName": "wwwroot/lib/bootstrap-4.1.0.min.js",
     "inputFiles": [
-      "wwwroot/lib/bootstrap-4.0.0.js"
+      "wwwroot/lib/bootstrap-4.1.0.js"
     ],
     "minify": {
       "enabled": true,

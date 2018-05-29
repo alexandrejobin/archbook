@@ -335,7 +335,10 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="NLog.config" />
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\Books\Details.cshtml" />
     <Content Include="Views\Pilotage\BooksPilotage\_Modal_Book.cshtml" />
     <Content Include="Views\Pilotage\BooksPilotage\_Modal_Book_Body.cshtml" />
