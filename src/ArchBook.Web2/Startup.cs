@@ -11,6 +11,7 @@ using ArchBook.Services.Pilotage.Books;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.AspNetCore.Mvc.Razor.TagHelpers;
 using Microsoft.AspNetCore.Mvc.TagHelpers;
@@ -50,6 +51,7 @@ namespace ArchBook.Web2
 
             services
                 .AddMvc()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
                 .AddViewOptions(setup =>
                 {
                     setup.HtmlHelperOptions.ClientValidationEnabled = false;

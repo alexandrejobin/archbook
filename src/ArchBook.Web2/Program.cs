@@ -30,7 +30,7 @@ namespace ArchBook.Web2
             try
             {
                 Log.Debug("Program start.");
-                BuildWebHost(args).Run();
+                CreateWebHostBuilder(args).Build().Run();
             }
             catch (Exception ex)
             {
@@ -43,7 +43,7 @@ namespace ArchBook.Web2
             }
         }
 
-        public static IWebHost BuildWebHost(string[] args)
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args)
         {
             var builder = new WebHostBuilder()
                 .UseKestrel()
@@ -79,7 +79,7 @@ namespace ArchBook.Web2
                 .UseSerilog()
                 .UseStartup<Startup>();
 
-            return builder.Build();
+            return builder;
         }
     }
 }
