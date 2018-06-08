@@ -68,6 +68,8 @@ namespace ArchBook.Web2
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApplicationLifetime applicationLifetime)
         {
+            app.UseSerilogUserNameEnricher();
+
             if (env.IsDevelopment())
             {
                 app.UseMiniProfiler();
@@ -81,7 +83,7 @@ namespace ArchBook.Web2
             }
 
             app.UseStaticFiles();
-            app.UseMvc();
+            app.UseMvc();            
 
             applicationLifetime.ApplicationStarted.Register(ApplicationStarted);
             applicationLifetime.ApplicationStopped.Register(ApplicationStopped);
