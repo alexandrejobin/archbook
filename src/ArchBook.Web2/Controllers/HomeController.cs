@@ -44,6 +44,12 @@ namespace ArchBook.Web2.Controllers
             return View();
         }
 
+        [HttpGet("privacy")]
+        public IActionResult Privacy()
+        {
+            return View();
+        }
+
         [HttpGet("error")]
         public IActionResult Error()
         {

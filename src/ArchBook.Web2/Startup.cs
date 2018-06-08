@@ -10,6 +10,7 @@ using ArchBook.Services.Books;
 using ArchBook.Services.Pilotage.Books;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
@@ -49,6 +50,13 @@ namespace ArchBook.Web2
                 options.PopupShowTimeWithChildren = true;
             });
 
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+
             services
                 .AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
@@ -82,9 +90,12 @@ namespace ArchBook.Web2
             {
                 app.UseStatusCodePagesWithReExecute("/errors/{0}/");
                 app.UseExceptionHandler("/errors/error500");
+                app.UseHsts();
             }
 
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseCookiePolicy();
             app.UseMvc();            
 
             applicationLifetime.ApplicationStarted.Register(ApplicationStarted);

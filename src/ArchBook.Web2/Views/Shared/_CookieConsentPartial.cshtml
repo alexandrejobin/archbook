@@ -1,0 +1,37 @@
+﻿@using Microsoft.AspNetCore.Http.Features
+
+@{
+    var consentFeature = Context.Features.Get<ITrackingConsentFeature>();
+    var showBanner = !consentFeature?.CanTrack ?? false;    
+}
+
+@if (showBanner)
+{
+    var cookieString = consentFeature.CreateConsentCookie();
+
+    <nav id="cookieConsent" class="navbar navbar-expand-lg navbar-light fixed-top bg-light" role="alert">
+        <div class="container">
+            <span class="navbar-brand"><span class="fas fa-info-circle" aria-hidden="true"></span></span>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#cookieConsent .navbar-collapse">
+                <i class="fas fa-bars fa-lg"></i>
+            </button>
+            <div class="collapse navbar-collapse">
+                <span class="navbar-text mr-auto">
+                    Use this space to summarize your privacy and cookie use policy.
+                </span>
+                <form class="form-inline">
+                    <a asp-controller="Home" asp-action="Privacy" class="btn btn-sm btn-info mr-sm-2">Learn More</a>
+                    <button type="button" class="btn btn-sm btn-light" data-cookie-string="@cookieString">Accept</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <script>
+        (function () {
+            document.querySelector("#cookieConsent button[data-cookie-string]").addEventListener("click", function (el) {
+                document.cookie = el.target.dataset.cookieString;
+                document.querySelector("#cookieConsent").classList.add("d-none");
+            }, false);
+        })();
+    </script>
+}
