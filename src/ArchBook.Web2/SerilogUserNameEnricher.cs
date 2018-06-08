@@ -27,9 +27,10 @@ namespace ArchBook.Web2
 
             var userName = context.User.Identity.IsAuthenticated ? context.User.Identity.Name : "(anonymous)";
 
-            LogContext.PushProperty(UserNamePropertyName, userName);
-
-            await _next.Invoke(context);
+            using (LogContext.PushProperty(UserNamePropertyName, userName))
+            {
+                await _next.Invoke(context);
+            }
         }
     }
 
