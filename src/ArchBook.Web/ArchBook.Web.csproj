@@ -286,10 +286,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\ArchBook.mdf" />
-    <Content Include="App_Data\ArchBook_log.ldf">
-      <DependentUpon>ArchBook.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\daterangepicker-2.1.27.css" />
     <Content Include="Content\fontawesome-5.0.2.css" />
     <Content Include="favicon.ico" />
@@ -326,6 +322,10 @@
     <Content Include="Content\bootstrap-4.0.0.css.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ArchBook.Data\ArchBook.Data.csproj">
+      <Project>{2B360EA3-DE62-43B5-9CDE-A51D43289B15}</Project>
+      <Name>ArchBook.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ArchBook.Services\ArchBook.Services.csproj">
       <Project>{03167fac-93f9-4828-8870-e0ec66ba2500}</Project>
       <Name>ArchBook.Services</Name>

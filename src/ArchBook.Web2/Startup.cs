@@ -38,7 +38,8 @@ namespace ArchBook.Web2
             this.logger = logger;
 
             // Set up data directory
-            AppDomain.CurrentDomain.SetData("DataDirectory", Path.Combine(env.ContentRootPath, "App_Data"));
+            var dataDirectory = Path.GetFullPath(Path.Combine(env.ContentRootPath, @"..\.."));
+            AppDomain.CurrentDomain.SetData("DataDirectory", dataDirectory);
         }
         
         // This method gets called by the runtime. Use this method to add services to the container.

@@ -1,4 +1,5 @@
-﻿using ArchBook.Web.Controllers.Errors;
+﻿using ArchBook.Data;
+using ArchBook.Web.Controllers.Errors;
 using Autofac;
 using Autofac.Integration.Mvc;
 using MTO.Framework.Web.Mvc;
@@ -7,6 +8,7 @@ using StackExchange.Profiling;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Net;
@@ -31,6 +33,10 @@ namespace ArchBook.Web
         protected void Application_Start()
         {
             logger.Info("Application is starting.");
+
+            // Set up data directory
+            var dataDirectory = Path.GetFullPath(Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, @"..\.."));
+            AppDomain.CurrentDomain.SetData("DataDirectory", dataDirectory);
 
             // take care of unhandled exceptions - there is nothing we can do to
             // prevent the entire w3wp process to go down but at least we can try

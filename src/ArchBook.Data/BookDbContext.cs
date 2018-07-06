@@ -29,7 +29,7 @@ namespace ArchBook.Data
 
         static BookDbContext()
         {
-            Database.SetInitializer<BookDbContext>(null);
+            Database.SetInitializer<BookDbContext>(new CreateDatabaseIfNotExists<BookDbContext>());
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
